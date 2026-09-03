@@ -7,3 +7,4 @@
 | **Program Studi** | D4 Teknik Informatika |
 | **Jurusan** | Teknologi Informasi |
 | **Institusi** | Politeknik Negeri Malang |
+--
