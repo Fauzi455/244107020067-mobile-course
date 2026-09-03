@@ -1,4 +1,4 @@
-## 👤 Biodata Diri
+## Biodata Diri
 
 - **Nama**: Mohamat Fauzi Rohman
 - **NIM**: 244107020067
