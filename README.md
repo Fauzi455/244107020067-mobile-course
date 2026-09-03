@@ -1,12 +1,9 @@
-## 👤 Biodata Diri
+## Biodata Diri
 
-| Informasi | Detail |
 | :--- | :--- |
-| **Nama** | Nama Lengkap Kamu |
-| **NIM** | 2141720000 |
-| **Kelas** | TI-3X / SIB-3X |
+| **Nama** | Mohamat Fauzi Rohman |
+| **NIM** | 244107020067 |
+| **Kelas** | TI-3F |
 | **Program Studi** | D4 Teknik Informatika |
 | **Jurusan** | Teknologi Informasi |
 | **Institusi** | Politeknik Negeri Malang |
-| **Email** | emailkamu@student.polinema.ac.id |
-| **GitHub** | [@usernamekamu](https://github.com/usernamekamu) |
