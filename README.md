@@ -1,8 +1,3 @@
-## Biodata Diri
+# Codelabs: Pemrograman Mobile
 
-- **Nama**: Mohamat Fauzi Rohman
-- **NIM**: 244107020067
-- **Kelas**: TI-3F
-- **Program Studi**: D4 Teknik Informatika
-- **Jurusan**: Teknologi Informasi
-- **Institusi**: Politeknik Negeri Malang
+> Modul praktikum berbasis codelab untuk mata kuliah **Pemrograman Mobile** dengan fokus pada Flutter modern, state management, REST API, local storage, FCM, testing, deployment, keamanan aplikasi, serta penggunaan AI secara bertanggung jawab dan terukur.
