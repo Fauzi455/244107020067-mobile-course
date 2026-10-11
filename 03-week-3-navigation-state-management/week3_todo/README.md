@@ -1,17 +1,17 @@
-# week3_todo
+# Dokumentasi Screenshot - Week 3 ToDo
 
-A new Flutter project.
+## Daftar Screenshot Hasil Aplikasi
 
-## Getting Started
+### 1. Halaman Utama (Daftar Tugas)
+Tampilan awal aplikasi yang menampilkan daftar To-Do List yang harus dikerjakan.
 
-This project is a starting point for a Flutter application.
+![Halaman Utama](https://github.com/Fauzi455/244107020067-mobile-course/blob/main/03-week-3-navigation-state-management/week3_todo/screenshot/Screenshot%202026-10-11%20233130.png)
 
-A few resources to get you started if this is your first Flutter project:
+### 2. Halaman Tambah Tugas (Add Task)
+Tampilan form saat pengguna ingin menambahkan tugas baru ke dalam daftar.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+![Tambah Tugas](https://github.com/Fauzi455/244107020067-mobile-course/blob/main/03-week-3-navigation-state-management/week3_todo/screenshot/Screenshot%202026-10-11%20233145.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 3. Perubahan State (Task Completed / Hapus)
+Tampilan yang menunjukkan perubahan *state* secara dinamis, misalnya saat tugas dicentang (selesai) atau setelah tugas dihapus dari daftar.
+![State Management Update](https://github.com/Fauzi455/244107020067-mobile-course/blob/main/03-week-3-navigation-state-management/week3_todo/screenshot/Screenshot%202026-10-11%20233215.png)
