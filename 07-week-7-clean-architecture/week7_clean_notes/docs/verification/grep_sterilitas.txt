@@ -1,0 +1,26 @@
+﻿================================================================
+# GREP 1 - presentation steril dari akses data mentah
+pattern : Dio\(|openDatabase|getDatabasesPath|FlutterSecureStorage|SharedPreferences\.getInstance|jsonDecode
+path    : lib\features\*\presentation, lib\pages
+----------------------------------------------------------------
+(NOL HASIL) - lolos
+
+================================================================
+# GREP 2 - domain & core steril dari framework/package
+pattern : import 'package:(flutter|dio|sqflite|firebase)
+path    : lib\features\*\domain, lib\core
+----------------------------------------------------------------
+(NOL HASIL) - lolos
+
+================================================================
+# GREP 3 - UI (pages/widgets) tidak menginstansiasi repository/Dio sendiri
+pattern : RepositoryImpl\(|Repository\(|Dio\(BaseOptions
+path    : lib\features\*\presentation\pages, lib\features\*\presentation\widgets, lib\pages
+----------------------------------------------------------------
+(NOL HASIL) - lolos
+
+CATATAN: folder presentation\providers SENGAJA tidak diperiksa GREP 3.
+Modul Minggu 7 menempatkan wiring DI di provider (contoh resmi modul:
+NoteRepositoryImpl(openDb: openNotesDb) di notes_providers.dart).
+Yang dilarang adalah widget/notifier membuat dependensi sendiri,
+sehingga pemeriksaan diarahkan ke pages/ dan widgets/.

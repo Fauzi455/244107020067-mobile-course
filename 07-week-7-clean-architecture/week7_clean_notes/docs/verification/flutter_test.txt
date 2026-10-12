@@ -1,0 +1,29 @@
+﻿00:00 +0: loading C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/format_test.dart
+00:00 +0: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/format_test.dart: formatDateTime menghasilkan tanggal Indonesia + jam
+00:00 +1: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/format_test.dart: formatDateTime bulan Januari dan Desember benar
+00:00 +2: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/format_test.dart: formatDateTime formatDateTimeWithSeconds menambahkan detik
+00:00 +3: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/format_test.dart: formatRelative kurang dari satu menit -> baru saja
+00:00 +4: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/format_test.dart: formatRelative menit, jam, dan hari
+00:00 +5: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/format_test.dart: parseNoteId angka valid dikembalikan apa adanya
+00:00 +6: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/format_test.dart: parseNoteId null / kosong / bukan angka -> 0
+00:00 +7: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/format_test.dart: parseIsoDate ISO valid diparse
+00:00 +8: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/format_test.dart: parseIsoDate kosong / invalid -> null
+00:00 +9: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/get_notes_test.dart: GetNotes meneruskan daftar dari repository
+00:00 +10: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/get_notes_test.dart: GetNotes meneruskan failure tanpa melempar
+00:00 +11: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/get_notes_test.dart: GetNotes tidak pernah menyentuh database sungguhan
+00:00 +12: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/note_model_test.dart: NoteModel.fromMap aman terhadap field yang hilang
+00:00 +13: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/note_model_test.dart: NoteModel.fromMap flag dirty bertahan pada serialisasi
+00:00 +14: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/note_model_test.dart: NoteModel.fromMap dirty=0 pada map dibaca sebagai false (edge case)
+00:00 +15: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/note_model_test.dart: toEntity() menghasilkan entity murni dengan nilai yang sama
+00:00 +16: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/note_model_test.dart: fromEntity() menyalin seluruh field
+00:01 +17: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/note_tile_test.dart: menampilkan judul, isi, dan tanpa badge saat sudah sinkron
+00:01 +18: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/note_tile_test.dart: menampilkan judul, isi, dan tanpa badge saat sudah sinkron
+00:01 +19: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/note_tile_test.dart: menampilkan judul, isi, dan tanpa badge saat sudah sinkron
+00:01 +20: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/note_tile_test.dart: menampilkan judul, isi, dan tanpa badge saat sudah sinkron
+00:01 +21: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/note_tile_test.dart: menampilkan judul, isi, dan tanpa badge saat sudah sinkron
+00:01 +22: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/note_tile_test.dart: menampilkan judul, isi, dan tanpa badge saat sudah sinkron
+00:01 +23: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/note_tile_test.dart: menampilkan judul, isi, dan tanpa badge saat sudah sinkron
+00:01 +24: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/note_tile_test.dart: menampilkan judul, isi, dan tanpa badge saat sudah sinkron
+00:02 +25: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/note_tile_test.dart: menampilkan badge saat dirty
+00:02 +26: C:/244107020067-mobile-course/07-week-7-clean-architecture/week7_clean_notes/test/note_tile_test.dart: memanggil onTap saat diketuk
+00:02 +27: All tests passed!
