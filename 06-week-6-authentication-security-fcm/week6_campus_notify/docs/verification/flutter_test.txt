@@ -1,0 +1,37 @@
+﻿00:00 +0: loading C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/api_refresh_interceptor_test.dart
+00:00 +0: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/api_refresh_interceptor_test.dart: interceptor 401 401 -> refresh -> ulang request -> 200, token baru tersimpan
+00:00 +1: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak email tanpa @
+00:00 +2: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak email tanpa @
+00:00 +3: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak email tanpa @
+00:00 +4: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak email tanpa @
+00:00 +5: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak email tanpa @
+00:00 +6: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak email tanpa @
+00:00 +7: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak email tanpa @
+00:00 +8: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak email tanpa @
+00:00 +9: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak email tanpa @
+00:00 +10: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak email tanpa @
+00:00 +11: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak email tanpa @
+00:00 +12: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/api_refresh_interceptor_test.dart: interceptor 401 401 lagi setelah retry -> berhenti, tidak ada loop
+00:00 +13: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak kata sandi kurang dari 6 karakter
+00:00 +14: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak kata sandi kurang dari 6 karakter
+00:00 +15: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak kata sandi kurang dari 6 karakter
+00:00 +16: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak kata sandi kurang dari 6 karakter
+00:01 +17: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak kata sandi kurang dari 6 karakter
+00:01 +18: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak kata sandi kurang dari 6 karakter
+00:01 +19: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login menolak kata sandi kurang dari 6 karakter
+00:01 +20: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/simulated_push_service_test.dart: SimulatedPushService emit menyalurkan tiga app state ke rute yang sama
+00:01 +21: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login mengembalikan pasangan access + refresh token
+00:01 +22: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.login mengembalikan pasangan access + refresh token
+00:01 +23: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.refresh menolak refresh token kosong
+00:02 +24: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.refresh menolak refresh token yang tidak dikenal
+00:02 +25: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.refresh menghasilkan access token baru dari refresh yang sah
+00:02 +26: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.refresh nonce token baru aman di semua platform (regresi bug web)
+00:02 +27: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.refresh nonce ikut berubah pada setiap refresh
+00:03 +28: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: AuthRepository.refresh refresh gagal -> sesi harus dianggap mati (paksa login ulang)
+00:03 +29: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: TokenStore.mask memotong token panjang dan menyebut jumlah karakter
+00:03 +30: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: TokenStore.mask menandai token yang belum ada
+00:03 +31: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: friendlyApiMessage 401 diterjemahkan menjadi pesan sesi berakhir
+00:03 +32: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: friendlyApiMessage 404 dan 5xx punya pesan masing-masing
+00:03 +33: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: friendlyApiMessage koneksi putus tidak membocorkan exception mentah
+00:03 +34: C:/244107020067-mobile-course/06-week-6-authentication-security-fcm/week6_campus_notify/test/auth_session_test.dart: friendlyApiMessage error non-Dio tetap menghasilkan pesan ramah
+00:03 +35: All tests passed!

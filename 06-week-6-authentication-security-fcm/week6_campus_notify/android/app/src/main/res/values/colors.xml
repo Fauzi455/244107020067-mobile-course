@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Warna aksen notifikasi FCM (dipakai oleh
+     com.google.firebase.messaging.default_notification_color di AndroidManifest).
+     Nilainya sama dengan `seed` ColorScheme aplikasi di lib/main.dart. -->
+<resources>
+    <color name="notification_color">#1B4B8F</color>
+</resources>
