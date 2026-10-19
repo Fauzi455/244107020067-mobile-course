@@ -1,18 +1,5 @@
 # Week 6 — Authentication, Security & FCM (Campus Notify)
 
-Aplikasi **Campus Notification App** untuk modul Minggu 6 codelab Flutter JTI
-Polinema. Fokus minggu ini bukan lagi layar, melainkan **jalur yang tidak
-terlihat**: bagaimana token disimpan dan diperbarui, bagaimana FCM mendaftarkan
-perangkat, dan apa yang terjadi saat notifikasi diklik pada tiga keadaan
-aplikasi.
-
-> Nilai minggu ini ada pada **pembuktian perilaku nyata** (log + screenshot),
-> bukan pada kode yang dihasilkan AI. Karena itu setiap klaim di README ini
-> punya berkas buktinya: log lalu lintas HTTP, jejak lifecycle push, dan
-> screenshot aplikasi yang benar-benar berjalan.
-
----
-
 ## 1. Tujuan pembelajaran
 
 - Menjelaskan alur autentikasi (Firebase Auth / JWT / OAuth) dan perbedaan
@@ -29,74 +16,9 @@ aplikasi.
 - Menerapkan prinsip keamanan dasar: tidak menyimpan secret di kode dan tidak
   mencatat token penuh ke log.
 
----
 
-## 2. Diagram alur yang diimplementasikan
 
-### 2.1 Sesi & refresh token
-
-```
-Login (email + kata sandi)
-   │
-   ├─► access token  (umur pendek, 15 menit)  ─┐
-   └─► refresh token (umur panjang, 7 hari)   ─┴─► flutter_secure_storage
-                                                   (Keystore / Keychain)
-
-Request API  ──Authorization: Bearer <access>──►  server
-                                                  │
-                                         401 (access kedaluwarsa)
-                                                  │
-        tukar refresh token (SEKALI SAJA) ◄───────┘
-              │                       │
-        sukses │                       │ refresh ikut kedaluwarsa
-              ▼                       ▼
-   simpan access baru →            bersihkan seluruh token →
-   ulangi request SATU kali        paksa pengguna ke /login
-```
-
-### 2.2 Arsitektur FCM
-
-```
-Backend kampus ──kirim──► Firebase Cloud Messaging ──push──► Perangkat
-      ▲                                                            │
-      │  POST /devices { fcm_token, platform }                     │
-      └──────────── registration token (getToken/onTokenRefresh) ──┘
-```
-
-Langkah wajibnya: (1) aplikasi meminta izin notifikasi, (2) mengambil
-**registration token** lewat `getToken()`, (3) mengirimnya ke backend lewat
-`POST /devices`, (4) backend memanggil FCM API untuk mengirim ke token/topik.
-
-### 2.3 Notification payload vs data payload
-
-| Jenis | Isi | Perilaku sistem |
-|---|---|---|
-| `notification` | `title` + `body` | Android menampilkan **otomatis** saat background/terminated; saat foreground harus ditampilkan manual |
-| `data` | key-value bebas, mis. `{route: "/pengumuman/3"}` | **Selalu** diteruskan ke handler aplikasi; tidak pernah ditampilkan otomatis |
-
-Aplikasi ini selalu mengirim **gabungan keduanya**: `notification` untuk teks
-yang dibaca manusia, `data.route` untuk tujuan deep link saat diklik. Tanpa
-`notification`, pengguna tidak melihat apa pun saat aplikasi di background;
-tanpa `data`, klik notifikasi tidak tahu harus membuka halaman mana.
-
-Payload contoh yang dipakai simulator maupun Firebase Console:
-
-```json
-{
-  "message": {
-    "topic": "pengumuman-kampus",
-    "notification": {
-      "title": "Jadwal kuliah berubah",
-      "body": "Kelas Mobile pindah ke Ruang A2 jam 13.00"
-    },
-    "data": { "route": "/pengumuman/3", "id": "3" }
-  }
-}
-```
-
----
-
-## 3. Fitur utama
+## 2. Fitur utama
 
 1. **Login + guard route (GoRouter)** — tanpa access token, seluruh rute
    dialihkan ke `/login`; sudah login, `/login` dialihkan ke beranda.
@@ -118,117 +40,8 @@ Payload contoh yang dipakai simulator maupun Firebase Console:
    identik dengan FCM sungguhan.
 10. **35 test lulus** tanpa Firebase dan tanpa jaringan sungguhan.
 
----
 
-## 4. Struktur folder
-
-```
-lib/
-├── main.dart                          # bootstrap: Firebase → sesi → router → push
-├── app_router.dart                    # GoRouter + guard route
-├── routes.dart                        # Refactoring 1: satu sumber kebenaran rute
-├── data/
-│   ├── token_store.dart               # pintu satu-satunya keluar-masuk token
-│   ├── auth_repository.dart           # mock auth, titik ganti Firebase Auth
-│   ├── api_client.dart                # Dio + refresh otomatis satu kali
-│   ├── api_log.dart                   # catatan lalu lintas untuk pembuktian
-│   ├── api_errors.dart                # Refactoring 3: DioException → pesan ramah
-│   └── announcements.dart             # pengumuman + DeviceRegistry (POST /devices)
-├── messaging/
-│   ├── push_service.dart              # kontrak + enum tiga app state
-│   ├── firebase_push_service.dart     # FCM sungguhan + background handler
-│   ├── simulated_push_service.dart    # kanal tiruan untuk demo tanpa perangkat
-│   ├── push_message.dart              # Refactoring 2: routeFromMessage (murni)
-│   └── notification_presenter.dart    # banner sistem + banner dalam aplikasi
-├── providers/
-│   ├── auth_provider.dart             # AuthNotifier + forceLogout()
-│   └── providers.dart                 # wiring DI (Dio, store, push, presenter)
-├── pages/
-│   ├── login_page.dart
-│   ├── home_shell_page.dart           # shell 3 tab
-│   ├── home_page.dart                 # sapaan + Simulator FCM + pengumuman
-│   ├── session_page.dart              # token terpotong + uji 401 + log
-│   ├── push_token_page.dart           # token terpotong, topik, jejak lifecycle
-│   └── announcement_page.dart         # tujuan deep link /pengumuman/:id
-└── widgets/
-    └── push_banner_host.dart          # banner foreground di atas semua halaman
-
-test/          # 35 test: rute, sesi, interceptor 401, kanal push tiruan
-docs/          # AI challenge, refactoring, pengujian, setup Firebase, bukti
-screenshots/   # 12 screenshot aplikasi yang berjalan (viewport ponsel)
-tool/          # mock API server, pemeriksa alur, pengambil screenshot
-```
-
----
-
-## 5. Stack teknologi
-
-| Kebutuhan | Package |
-|---|---|
-| State management + DI | `flutter_riverpod` 3.x |
-| Navigasi + deep link | `go_router` 18.x |
-| Jaringan | `dio` 5.x |
-| Penyimpanan token | `flutter_secure_storage` 11.x (Keystore / Keychain) |
-| Push notification | `firebase_core` 4.x, `firebase_messaging` 16.x |
-| Banner foreground | `flutter_local_notifications` 22.x |
-| Lint | `flutter_lints` 6.x |
-
----
-
-## 6. Cara menjalankan
-
-### 6.1 Sekali saja
-
-```bash
-cd 06-week-6-authentication-security-fcm/week6_campus_notify
-flutter pub get
-```
-
-### 6.2 Backend tiruan (wajib untuk melihat jalur 401)
-
-```bash
-# terminal 1 — tidak ada dependensi eksternal
-node tool/mock_api_server.js 8787
-
-# terminal 2 — buktikan kontrak server tanpa aplikasi
-node tool/check_api_flow.js
-```
-
-Server ini menerbitkan **401 sungguhan** untuk access token yang dicabut, jadi
-jalur refresh benar-benar diuji, bukan hanya dibaca dari kode. Base URL bisa
-diganti saat build: `--dart-define=API_BASE_URL=https://...`.
-
-### 6.3 Target utama codelab (Android, perangkat/emulator dengan Play Store)
-
-```bash
-flutter run
-```
-
-Tanpa `google-services.json`, aplikasi **tetap berjalan**: Firebase dilewati
-dan kanal push tiruan dipakai (lihat `firebaseReady` di `lib/main.dart`).
-Langkah mengaktifkan FCM sungguhan ada di
-[`docs/firebase_setup.md`](docs/firebase_setup.md).
-
-### 6.4 Menjalankan di browser (dipakai untuk dokumentasi screenshot)
-
-```bash
-flutter build web --release
-node tool/serve_web.js build/web 8123      # terminal terpisah
-```
-
-FCM tidak tersedia di web tanpa konfigurasi penuh, jadi di web kanal tiruan
-yang aktif — justru inilah alasan kanal tiruan dibuat.
-
-### 6.5 Analisis statis + test
-
-```bash
-flutter analyze     # No issues found!
-flutter test        # 35 test, semua lulus
-```
-
----
-
-## 7. Hasil / Screenshot
+## 3. Hasil / Screenshot
 
 Semua screenshot diambil dari **aplikasi yang benar-benar berjalan** pada
 viewport layout mobile (390 × 780, DPR 2 → berkas 780 × 1560 px), satu langkah
@@ -292,7 +105,7 @@ per proses. Cara mengambil ulang: [`docs/screenshots.md`](docs/screenshots.md).
 
 ---
 
-## 8. Tabel pengujian tiga app state (wajib modul)
+## 4. Tabel pengujian tiga app state (wajib modul)
 
 Payload yang dipakai identik pada ketiga baris:
 `notification {title, body}` + `data {route: "/pengumuman/3", id: "3"}`.
@@ -312,7 +125,7 @@ Detail tambahan (termasuk cara menguji dengan Firebase Console sungguhan):
 
 ---
 
-## 9. Pengujian
+## 5. Pengujian
 
 ```bash
 flutter test     # 35 test, semua lulus
@@ -338,7 +151,7 @@ node tool/check_api_flow.js
 
 ---
 
-## 10. Refactoring Challenge (tiga-duanya wajib)
+## 6. Refactoring Challenge (tiga-duanya wajib)
 
 Detail dan alasan: [`docs/refactoring.md`](docs/refactoring.md).
 
@@ -353,7 +166,7 @@ Detail dan alasan: [`docs/refactoring.md`](docs/refactoring.md).
 
 ---
 
-## 11. AI Challenge
+## 7. AI Challenge
 
 Prompt, keluaran awal AI, tabel usulan-vs-keputusan, dan checklist verifikasi
 modul ada di [`docs/AI_challenge/`](docs/AI_challenge/README.md).
@@ -371,7 +184,7 @@ Ringkasan yang **menyimpang** dari usulan AI:
 
 ---
 
-## 12. Prinsip keamanan yang diterapkan
+## 8. Prinsip keamanan yang diterapkan
 
 | Aturan | Wujudnya di kode |
 |---|---|
@@ -385,7 +198,7 @@ Ringkasan yang **menyimpang** dari usulan AI:
 
 ---
 
-## 13. Refleksi
+## Refleksi
 
 1. **Mengapa refresh token tidak boleh disimpan di SharedPreferences? Apa
    risikonya bila bocor?**
@@ -421,54 +234,8 @@ Ringkasan yang **menyimpang** dari usulan AI:
    `0` di web sehingga jalur refresh selalu gagal di sana. Keduanya ditemukan
    lewat pengujian, bukan lewat membaca ulang kode.
 
----
 
-## 14. Error umum & solusi
-
-| Gejala | Penyebab | Solusi |
-|---|---|---|
-| Token `null` / notifikasi tidak sampai di emulator | Emulator tanpa Google Play Services | Pakai emulator berikon Play Store atau perangkat fisik |
-| Banner tidak muncul saat foreground | Mengandalkan banner otomatis sistem | Tampilkan manual lewat `flutter_local_notifications` di `onMessage` — sudah dilakukan di `NotificationPresenter.show()` |
-| Klik notifikasi tidak navigasi saat terminated | `getInitialMessage()` tidak dipanggil saat startup | Panggil setelah router siap, teruskan `data.route` (lihat `FirebasePushService.start()` langkah 5) |
-| 401 berulang meski sudah login | Interceptor mengulang request tanpa penanda, atau refresh ikut kedaluwarsa | Ulangi **sekali** dengan penanda `extra`, lalu `clear()` + arahkan ke `/login` |
-| Pengguna tiba-tiba kembali ke `/login` tanpa sebab | Jalur refresh gagal — pernah terjadi karena `nextInt(1 << 32)` = `0` di web | Lihat pesan error di log lalu lintas; batasi nilai acak ke rentang aman |
-| `MissingPluginException` (secure storage / messaging) | Hot reload setelah menambah plugin | Hentikan penuh lalu `flutter run` ulang |
-| `google-services.json is missing` saat build | Plugin Google Services di-apply tanpa berkasnya | Berkas ini **hanya** di-apply bila `google-services.json` ada — taruh berkasnya, atau biarkan aplikasi memakai kanal tiruan |
-| Notifikasi iOS tidak muncul | Belum ada APNs key / capability Push | Konfigurasi APNs di Firebase Console + aktifkan Push di Xcode ([`docs/firebase_setup.md`](docs/firebase_setup.md) §4) |
-| `flutter_local_notifications` gagal kompilasi | Core library desugaring belum aktif | `isCoreLibraryDesugaringEnabled = true` + `coreLibraryDesugaring(...)` — sudah diset di `android/app/build.gradle.kts` |
-
----
-
-## 15. Checklist verifikasi mandiri
-
-- [x] Token hanya di `flutter_secure_storage`; tidak ada SharedPreferences, tidak
-      di-hardcode, tidak dicetak penuh (bukti: `04_sesi_token.png`,
-      `06_push_token.png`, `10_rotate_token.png`).
-- [x] 401 memicu refresh **sekali** lalu retry; refresh mati memaksa login ulang
-      (bukti: `05_api_401_refresh.png` + `test/api_refresh_interceptor_test.dart`).
-- [x] Ketiga app state teruji dengan tabel bukti; klik masuk ke rute yang benar
-      (`07`–`09`).
-- [x] Topik untuk broadcast (`pengumuman-kampus`), token untuk pesan personal
-      (dokumentasi `POST /devices`).
-- [x] `flutter analyze` bersih dan 35 test lulus
-      (`docs/verification/flutter_analyze.txt`, `flutter_test.txt`).
-- [x] Tiga Refactoring Challenge dikerjakan (`lib/routes.dart`,
-      `routeFromMessage`, `lib/data/api_errors.dart`).
-- [x] AI Challenge didokumentasikan (prompt, keluaran awal, perbaikan manual,
-      alasan teknis) di `docs/AI_challenge/`.
-- [ ] `screenshots/fcm-console-test.png` — **butuh Firebase project +
-      perangkat fisik**; langkahnya sudah disiapkan di
-      [`docs/firebase_setup.md`](docs/firebase_setup.md) §5.
-
----
-
-## 16. Referensi
+## Referensi
 
 - [Modul Week 6 — Authentication, Security & FCM](https://jti-polinema.github.io/flutter-codelab/06-minggu-6-authentication-security-fcm/index.html)
-- [FCM Flutter client (setup & token)](https://firebase.google.com/docs/cloud-messaging/flutter/client)
-- [FCM message types: notification vs data](https://firebase.google.com/docs/cloud-messaging/concept-options)
-- [Firebase Auth for Flutter](https://firebase.google.com/docs/auth/flutter/start)
-- [flutter_secure_storage](https://pub.dev/packages/flutter_secure_storage)
-- [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications)
-- [GoRouter: redirect & deep linking](https://go_router.dev/)
-- [OWASP Mobile Top 10](https://owasp.org/www-project-mobile-top-10/)
+
